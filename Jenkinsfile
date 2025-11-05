@@ -75,31 +75,29 @@ pipeline {
                 echo '🚀 Deploying to EC2 Application Server...'
                 script {
                     withAWS(credentials: "${AWS_CREDENTIALS}", region: "${AWS_REGION}") {
-                        sshagent(['ec2-ssh-key']) {  // Add SSH key in Jenkins credentials
-                            sh """
-                                ssh -o StrictHostKeyChecking=no ${APP_SERVER} '
-                                    # Login to ECR
-                                    aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}
-                                    
-                                    # Stop and remove old container
-                                    docker stop ${CONTAINER_NAME} || true
-                                    docker rm ${CONTAINER_NAME} || true
-                                    
-                                    # Pull latest image
-                                    docker pull ${ECR_REGISTRY}/${ECR_REPOSITORY}:latest
-                                    
-                                    # Run new container
-                                    docker run -d \
-                                        --name ${CONTAINER_NAME} \
-                                        -p 3000:3000 \
-                                        --restart unless-stopped \
-                                        ${ECR_REGISTRY}/${ECR_REPOSITORY}:latest
-                                    
-                                    # Verify container is running
-                                    docker ps | grep ${CONTAINER_NAME}
-                                '
-                            """
-                        }
+                        sh """
+                            ssh -i ~/.ssh/jenkins-key.pem -o StrictHostKeyChecking=no ${APP_SERVER} '
+                                # Login to ECR
+                                aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}
+                                
+                                # Stop and remove old container
+                                docker stop ${CONTAINER_NAME} || true
+                                docker rm ${CONTAINER_NAME} || true
+                                
+                                # Pull latest image
+                                docker pull ${ECR_REGISTRY}/${ECR_REPOSITORY}:latest
+                                
+                                # Run new container
+                                docker run -d \
+                                    --name ${CONTAINER_NAME} \
+                                    -p 3000:3000 \
+                                    --restart unless-stopped \
+                                    ${ECR_REGISTRY}/${ECR_REPOSITORY}:latest
+                                
+                                # Verify container is running
+                                docker ps | grep ${CONTAINER_NAME}
+                            '
+                        """
                     }
                 }
             }
