@@ -4,12 +4,12 @@ pipeline {
     environment {
         // AWS Configuration
         AWS_REGION = 'us-east-1'  // Change to your region
-        ECR_REGISTRY = 'YOUR_AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com'  // Replace with your ECR URI
-        ECR_REPOSITORY = 'my-webapp'
+        ECR_REGISTRY = '765309831951.dkr.ecr.us-east-1.amazonaws.com/my-app'  // Replace with your ECR URI
+        ECR_REPOSITORY = 'my-app'
         IMAGE_TAG = "${BUILD_NUMBER}"
         
         // Application Server Configuration
-        APP_SERVER = 'ubuntu@YOUR_APP_SERVER_IP'  // Replace with your App Server IP
+        APP_SERVER = 'ubuntu@54.227.84.152'  // Replace with your App Server IP
         CONTAINER_NAME = 'my-webapp-container'
         
         // AWS Credentials
