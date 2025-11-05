@@ -128,22 +128,42 @@ pipeline {
             echo "🌐 Application is live at: http://YOUR_APP_SERVER_IP:3000"
             
             // Send email notification (optional - requires email configuration)
-            // emailext(
-            //     subject: "✅ Build #${BUILD_NUMBER} - SUCCESS",
-            //     body: "The pipeline completed successfully. Application deployed!",
-            //     to: "your-email@example.com"
-            // )
+            emailext(
+                subject: "✅ Build #${BUILD_NUMBER} - SUCCESS",
+                body: """
+                    <h2>Build Successful!</h2>
+                    <p><strong>Project:</strong> ${env.JOB_NAME}</p>
+                    <p><strong>Build Number:</strong> ${env.BUILD_NUMBER}</p>
+                    <p><strong>Status:</strong> SUCCESS ✅</p>
+                    <p><strong>Application URL:</strong> <a href="http://54.227.84.152:3000">http://54.227.84.152:3000</a></p>
+                    <p><strong>Build URL:</strong> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                    <hr>
+                    <p>The application has been successfully deployed!</p>
+                """,
+                to: "lk040904@gmail.com",
+                mimeType: 'text/html'
+            )
         }
         
         failure {
             echo '❌ Pipeline failed!'
             
             // Send email notification (optional)
-            // emailext(
-            //     subject: "❌ Build #${BUILD_NUMBER} - FAILED",
-            //     body: "The pipeline failed. Please check Jenkins logs.",
-            //     to: "your-email@example.com"
-            // )
+            emailext(
+                subject: "❌ Build #${BUILD_NUMBER} - FAILED",
+                body: """
+                    <h2>Build Failed!</h2>
+                    <p><strong>Project:</strong> ${env.JOB_NAME}</p>
+                    <p><strong>Build Number:</strong> ${env.BUILD_NUMBER}</p>
+                    <p><strong>Status:</strong> FAILURE ❌</p>
+                    <p><strong>Build URL:</strong> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                    <p><strong>Console Output:</strong> <a href="${env.BUILD_URL}console">${env.BUILD_URL}console</a></p>
+                    <hr>
+                    <p>Please check the Jenkins logs for more details.</p>
+                """,
+                to: "lk040904@gmail.com",
+                mimeType: 'text/html'
+            )
         }
         
         always {
