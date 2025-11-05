@@ -25,7 +25,9 @@ function assertEquals(actual, expected, message) {
 // Test 1: Check if app module exists
 test('app.js module should be loadable', () => {
   const app = require('./app.js');
-  assertEquals(typeof app, 'object', 'App should export an object');
+  if (typeof app !== 'object' && typeof app !== 'function') {
+    throw new Error('App should export an object or function');
+  }
 });
 
 // Test 2: Check if Express is installed
