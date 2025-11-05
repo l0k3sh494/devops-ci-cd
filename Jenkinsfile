@@ -4,7 +4,7 @@ pipeline {
     environment {
         // AWS Configuration
         AWS_REGION = 'us-east-1'  // Change to your region
-        ECR_REGISTRY = '765309831951.dkr.ecr.us-east-1.amazonaws.com/my-app'  // Replace with your ECR URI
+        ECR_REGISTRY = '765309831951.dkr.ecr.us-east-1.amazonaws.com'  // Replace with your ECR URI
         ECR_REPOSITORY = 'my-app'
         IMAGE_TAG = "${BUILD_NUMBER}"
         
