@@ -53,7 +53,7 @@ app.get('/', (req, res) => {
       </head>
       <body>
         <div class="container">
-          <h1>🚀 Hello Nikhil!</h1>
+          <h1>🚀 Hello World!</h1>
           <p>Welcome to My CI/CD Pipeline Demo</p>
           <p><strong>Deployed via Jenkins + Docker + AWS</strong></p>
           <div>
