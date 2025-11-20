@@ -3,13 +3,13 @@ pipeline {
     
     environment {
         // AWS Configuration
-        AWS_REGION = 'us-east-1'  // Change to your region
-        ECR_REGISTRY = '765309831951.dkr.ecr.us-east-1.amazonaws.com'  // Replace with your ECR URI
+        AWS_REGION = 'ap-south-1'  // Change to your region
+        ECR_REGISTRY = '765309831951.dkr.ecr.ap-south-1.amazonaws.com'  // Replace with your ECR URI
         ECR_REPOSITORY = 'my-app'
         IMAGE_TAG = "${BUILD_NUMBER}"
         
         // Application Server Configuration
-        APP_SERVER = 'ubuntu@54.159.181.30'  // Replace with your App Server IP
+        APP_SERVER = 'ubuntu@13.204.226.139'  // Replace with your App Server IP
         CONTAINER_NAME = 'my-webapp-container'
         
         // AWS Credentials
@@ -135,7 +135,7 @@ pipeline {
                     <p><strong>Project:</strong> ${env.JOB_NAME}</p>
                     <p><strong>Build Number:</strong> ${env.BUILD_NUMBER}</p>
                     <p><strong>Status:</strong> SUCCESS ✅</p>
-                    <p><strong>Application URL:</strong> <a href="http://54.159.181.30:3000">http://54.159.181.30:3000</a></p>
+                    <p><strong>Application URL:</strong> <a href="http://13.204.226.139:3000">http://13.204.226.139:3000</a></p>
                     <p><strong>Build URL:</strong> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
                     <hr>
                     <p>The application has been successfully deployed!</p>
