@@ -55,7 +55,7 @@ app.get('/', (req, res) => {
         <div class="container">
           <h1>🚀 Hello World!</h1>
           <p>Welcome to My CI/CD Pipeline Demo</p>
-            <p>This is Janaaki N</p>
+            <p>This is Janaaki N from Iot-A</p>
           <p><strong>Deployed via Jenkins + Docker + AWS</strong></p>
           <div>
             <span class="badge">✓ GitHub Integration</span>
